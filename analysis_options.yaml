@@ -3,5 +3,3 @@ include: package:pedantic_mono/analysis_options.yaml
 analyzer:
   strong-mode:
     implicit-dynamic: true
-  exclude:
-    - "lib/firebase_options.dart"
