@@ -9,7 +9,6 @@ targets:
         generate_for:
           include:
             - lib/models/**/*.dart
-            - lib/**/*_state.dart
       json_serializable:
         generate_for:
           include:
