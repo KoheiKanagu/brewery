@@ -11,8 +11,12 @@ class HomePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(),
-      body: const Text('hoge'),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {},
+          child: const Text('push'),
+        ),
+      ),
     );
   }
 }
