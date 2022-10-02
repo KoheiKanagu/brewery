@@ -11,7 +11,7 @@ class HomebrewInfo with _$HomebrewInfo {
   const factory HomebrewInfo({
     @Default('unknown') String name,
     @Default(HomebrewInfoVersion()) HomebrewInfoVersion versions,
-    @Default([]) HomebrewInfoInstalled installed,
+    @Default([]) List<HomebrewInfoInstalled> installed,
     @Default(false) bool outdated,
   }) = _HomebrewInfo;
 

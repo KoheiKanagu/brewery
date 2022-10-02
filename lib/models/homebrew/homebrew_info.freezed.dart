@@ -22,7 +22,8 @@ HomebrewInfo _$HomebrewInfoFromJson(Map<String, dynamic> json) {
 mixin _$HomebrewInfo {
   String get name => throw _privateConstructorUsedError;
   HomebrewInfoVersion get versions => throw _privateConstructorUsedError;
-  HomebrewInfoInstalled get installed => throw _privateConstructorUsedError;
+  List<HomebrewInfoInstalled> get installed =>
+      throw _privateConstructorUsedError;
   bool get outdated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,11 +40,10 @@ abstract class $HomebrewInfoCopyWith<$Res> {
   $Res call(
       {String name,
       HomebrewInfoVersion versions,
-      HomebrewInfoInstalled installed,
+      List<HomebrewInfoInstalled> installed,
       bool outdated});
 
   $HomebrewInfoVersionCopyWith<$Res> get versions;
-  $HomebrewInfoInstalledCopyWith<$Res> get installed;
 }
 
 /// @nodoc
@@ -73,7 +73,7 @@ class _$HomebrewInfoCopyWithImpl<$Res> implements $HomebrewInfoCopyWith<$Res> {
       installed: installed == freezed
           ? _value.installed
           : installed // ignore: cast_nullable_to_non_nullable
-              as HomebrewInfoInstalled,
+              as List<HomebrewInfoInstalled>,
       outdated: outdated == freezed
           ? _value.outdated
           : outdated // ignore: cast_nullable_to_non_nullable
@@ -85,13 +85,6 @@ class _$HomebrewInfoCopyWithImpl<$Res> implements $HomebrewInfoCopyWith<$Res> {
   $HomebrewInfoVersionCopyWith<$Res> get versions {
     return $HomebrewInfoVersionCopyWith<$Res>(_value.versions, (value) {
       return _then(_value.copyWith(versions: value));
-    });
-  }
-
-  @override
-  $HomebrewInfoInstalledCopyWith<$Res> get installed {
-    return $HomebrewInfoInstalledCopyWith<$Res>(_value.installed, (value) {
-      return _then(_value.copyWith(installed: value));
     });
   }
 }
@@ -106,13 +99,11 @@ abstract class _$$_HomebrewInfoCopyWith<$Res>
   $Res call(
       {String name,
       HomebrewInfoVersion versions,
-      HomebrewInfoInstalled installed,
+      List<HomebrewInfoInstalled> installed,
       bool outdated});
 
   @override
   $HomebrewInfoVersionCopyWith<$Res> get versions;
-  @override
-  $HomebrewInfoInstalledCopyWith<$Res> get installed;
 }
 
 /// @nodoc
@@ -143,9 +134,9 @@ class __$$_HomebrewInfoCopyWithImpl<$Res>
           : versions // ignore: cast_nullable_to_non_nullable
               as HomebrewInfoVersion,
       installed: installed == freezed
-          ? _value.installed
+          ? _value._installed
           : installed // ignore: cast_nullable_to_non_nullable
-              as HomebrewInfoInstalled,
+              as List<HomebrewInfoInstalled>,
       outdated: outdated == freezed
           ? _value.outdated
           : outdated // ignore: cast_nullable_to_non_nullable
@@ -160,8 +151,9 @@ class _$_HomebrewInfo implements _HomebrewInfo {
   const _$_HomebrewInfo(
       {this.name = 'unknown',
       this.versions = const HomebrewInfoVersion(),
-      this.installed = const [],
-      this.outdated = false});
+      final List<HomebrewInfoInstalled> installed = const [],
+      this.outdated = false})
+      : _installed = installed;
 
   factory _$_HomebrewInfo.fromJson(Map<String, dynamic> json) =>
       _$$_HomebrewInfoFromJson(json);
@@ -172,9 +164,14 @@ class _$_HomebrewInfo implements _HomebrewInfo {
   @override
   @JsonKey()
   final HomebrewInfoVersion versions;
+  final List<HomebrewInfoInstalled> _installed;
   @override
   @JsonKey()
-  final HomebrewInfoInstalled installed;
+  List<HomebrewInfoInstalled> get installed {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_installed);
+  }
+
   @override
   @JsonKey()
   final bool outdated;
@@ -191,7 +188,8 @@ class _$_HomebrewInfo implements _HomebrewInfo {
             other is _$_HomebrewInfo &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.versions, versions) &&
-            const DeepCollectionEquality().equals(other.installed, installed) &&
+            const DeepCollectionEquality()
+                .equals(other._installed, _installed) &&
             const DeepCollectionEquality().equals(other.outdated, outdated));
   }
 
@@ -201,7 +199,7 @@ class _$_HomebrewInfo implements _HomebrewInfo {
       runtimeType,
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(versions),
-      const DeepCollectionEquality().hash(installed),
+      const DeepCollectionEquality().hash(_installed),
       const DeepCollectionEquality().hash(outdated));
 
   @JsonKey(ignore: true)
@@ -221,7 +219,7 @@ abstract class _HomebrewInfo implements HomebrewInfo {
   const factory _HomebrewInfo(
       {final String name,
       final HomebrewInfoVersion versions,
-      final HomebrewInfoInstalled installed,
+      final List<HomebrewInfoInstalled> installed,
       final bool outdated}) = _$_HomebrewInfo;
 
   factory _HomebrewInfo.fromJson(Map<String, dynamic> json) =
@@ -232,7 +230,7 @@ abstract class _HomebrewInfo implements HomebrewInfo {
   @override
   HomebrewInfoVersion get versions;
   @override
-  HomebrewInfoInstalled get installed;
+  List<HomebrewInfoInstalled> get installed;
   @override
   bool get outdated;
   @override
