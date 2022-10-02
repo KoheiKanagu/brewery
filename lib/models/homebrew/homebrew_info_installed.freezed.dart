@@ -22,6 +22,7 @@ HomebrewInfoInstalled _$HomebrewInfoInstalledFromJson(
 /// @nodoc
 mixin _$HomebrewInfoInstalled {
   String get version => throw _privateConstructorUsedError;
+  @JsonKey(name: 'installed_on_request')
   bool get installedOnRequest => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +36,9 @@ abstract class $HomebrewInfoInstalledCopyWith<$Res> {
   factory $HomebrewInfoInstalledCopyWith(HomebrewInfoInstalled value,
           $Res Function(HomebrewInfoInstalled) then) =
       _$HomebrewInfoInstalledCopyWithImpl<$Res>;
-  $Res call({String version, bool installedOnRequest});
+  $Res call(
+      {String version,
+      @JsonKey(name: 'installed_on_request') bool installedOnRequest});
 }
 
 /// @nodoc
@@ -72,7 +75,9 @@ abstract class _$$_HomebrewInfoInstalledCopyWith<$Res>
           $Res Function(_$_HomebrewInfoInstalled) then) =
       __$$_HomebrewInfoInstalledCopyWithImpl<$Res>;
   @override
-  $Res call({String version, bool installedOnRequest});
+  $Res call(
+      {String version,
+      @JsonKey(name: 'installed_on_request') bool installedOnRequest});
 }
 
 /// @nodoc
@@ -109,7 +114,8 @@ class __$$_HomebrewInfoInstalledCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_HomebrewInfoInstalled implements _HomebrewInfoInstalled {
   const _$_HomebrewInfoInstalled(
-      {this.version = 'unknown', this.installedOnRequest = false});
+      {this.version = 'unknown',
+      @JsonKey(name: 'installed_on_request') this.installedOnRequest = false});
 
   factory _$_HomebrewInfoInstalled.fromJson(Map<String, dynamic> json) =>
       _$$_HomebrewInfoInstalledFromJson(json);
@@ -118,7 +124,7 @@ class _$_HomebrewInfoInstalled implements _HomebrewInfoInstalled {
   @JsonKey()
   final String version;
   @override
-  @JsonKey()
+  @JsonKey(name: 'installed_on_request')
   final bool installedOnRequest;
 
   @override
@@ -160,7 +166,8 @@ class _$_HomebrewInfoInstalled implements _HomebrewInfoInstalled {
 abstract class _HomebrewInfoInstalled implements HomebrewInfoInstalled {
   const factory _HomebrewInfoInstalled(
       {final String version,
-      final bool installedOnRequest}) = _$_HomebrewInfoInstalled;
+      @JsonKey(name: 'installed_on_request')
+          final bool installedOnRequest}) = _$_HomebrewInfoInstalled;
 
   factory _HomebrewInfoInstalled.fromJson(Map<String, dynamic> json) =
       _$_HomebrewInfoInstalled.fromJson;
@@ -168,6 +175,7 @@ abstract class _HomebrewInfoInstalled implements HomebrewInfoInstalled {
   @override
   String get version;
   @override
+  @JsonKey(name: 'installed_on_request')
   bool get installedOnRequest;
   @override
   @JsonKey(ignore: true)

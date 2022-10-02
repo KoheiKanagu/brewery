@@ -16,16 +16,17 @@ _$_HomebrewInfoInstalled _$$_HomebrewInfoInstalledFromJson(
       ($checkedConvert) {
         final val = _$_HomebrewInfoInstalled(
           version: $checkedConvert('version', (v) => v as String? ?? 'unknown'),
-          installedOnRequest:
-              $checkedConvert('installedOnRequest', (v) => v as bool? ?? false),
+          installedOnRequest: $checkedConvert(
+              'installed_on_request', (v) => v as bool? ?? false),
         );
         return val;
       },
+      fieldKeyMap: const {'installedOnRequest': 'installed_on_request'},
     );
 
 Map<String, dynamic> _$$_HomebrewInfoInstalledToJson(
         _$_HomebrewInfoInstalled instance) =>
     <String, dynamic>{
       'version': instance.version,
-      'installedOnRequest': instance.installedOnRequest,
+      'installed_on_request': instance.installedOnRequest,
     };
