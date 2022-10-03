@@ -8,16 +8,14 @@ void main() {
     final container = ProviderContainer();
     addTearDown(container.dispose);
 
-    final actual = container.read(brewController);
     expect(
-      actual,
+      container.read(brewController),
       const AsyncValue<List<HomebrewInfo>>.loading(),
     );
 
-    await container.read(brewController.notifier).fetchInfo();
     expect(
-      container.read(brewController),
-      isA<AsyncData<List<HomebrewInfo>>>(),
+      container.read(brewController.notifier).fetchInfo(),
+      isA<List<HomebrewInfo>>(),
     );
   });
 }
