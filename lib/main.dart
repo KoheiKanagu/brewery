@@ -42,7 +42,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = ThemeData.from(
-      colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF00A5BF)),
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFFD8A500),
+        secondary: const Color(0xFF001A43),
+      ),
       textTheme: Typography.material2021().black,
       useMaterial3: true,
     );
