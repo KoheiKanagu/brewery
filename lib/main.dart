@@ -27,8 +27,11 @@ void main() {
   };
 
   runApp(
-    const ProviderScope(
-      child: MyApp(),
+    ProviderScope(
+      observers: [
+        ProviderLogger(),
+      ],
+      child: const MyApp(),
     ),
   );
 }
