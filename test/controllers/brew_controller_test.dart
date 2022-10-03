@@ -14,7 +14,7 @@ void main() {
     );
 
     expect(
-      container.read(brewController.notifier).fetchInfo(),
+      await container.read(brewController.notifier).fetchInfo(),
       isA<List<HomebrewInfo>>(),
     );
   });

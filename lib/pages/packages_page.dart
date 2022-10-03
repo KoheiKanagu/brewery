@@ -1,5 +1,6 @@
 import 'package:brewery/controllers/brew_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PackagesPage extends HookConsumerWidget {
@@ -9,26 +10,35 @@ class PackagesPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ListView(
-      children: ref.watch(brewController).when(
-            data: (data) => data
-                .map(
-                  (e) => ListTile(
-                    title: Text(e.name),
-                    subtitle: Text('latest: ${e.versions.stable}'),
-                  ),
-                )
-                .toList(),
-            error: (error, stackTrace) {
-              return [
-                const Text('error'),
-              ];
-            },
-            loading: () => [
-              const Center(
-                child: CircularProgressIndicator.adaptive(),
-              )
-            ],
+    return Scaffold(
+      floatingActionButton: ref.watch(brewController).isLoading
+          ? const FloatingActionButton.small(
+              onPressed: null,
+              child: CircularProgressIndicator.adaptive(),
+            )
+          : FloatingActionButton.small(
+              onPressed: () {
+                ref.read(brewController.notifier).refresh();
+              },
+              child: const Icon(FontAwesomeIcons.rotateRight),
+            ),
+      body: ref.watch(brewController).when(
+            data: (data) => ListView(
+              children: data
+                  .map(
+                    (e) => ListTile(
+                      title: Text(e.name),
+                      subtitle: Text('latest: ${e.versions.stable}'),
+                    ),
+                  )
+                  .toList(),
+            ),
+            error: (error, stackTrace) => Center(
+              child: Text('$error'),
+            ),
+            loading: () => const Center(
+              child: CircularProgressIndicator.adaptive(),
+            ),
           ),
     );
   }

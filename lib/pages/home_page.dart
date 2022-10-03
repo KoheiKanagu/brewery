@@ -23,9 +23,8 @@ class HomePage extends HookConsumerWidget {
         body = Container();
         break;
     }
-
-    return Scaffold(
-      body: Row(
+    return Material(
+      child: Row(
         children: [
           const Expanded(
             child: MySideBarWidget(),
