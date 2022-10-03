@@ -25,6 +25,7 @@ mixin _$HomebrewInfo {
   List<HomebrewInfoInstalled> get installed =>
       throw _privateConstructorUsedError;
   bool get outdated => throw _privateConstructorUsedError;
+  String get homepage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +42,8 @@ abstract class $HomebrewInfoCopyWith<$Res> {
       {String name,
       HomebrewInfoVersion versions,
       List<HomebrewInfoInstalled> installed,
-      bool outdated});
+      bool outdated,
+      String homepage});
 
   $HomebrewInfoVersionCopyWith<$Res> get versions;
 }
@@ -60,6 +62,7 @@ class _$HomebrewInfoCopyWithImpl<$Res> implements $HomebrewInfoCopyWith<$Res> {
     Object? versions = freezed,
     Object? installed = freezed,
     Object? outdated = freezed,
+    Object? homepage = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -78,6 +81,10 @@ class _$HomebrewInfoCopyWithImpl<$Res> implements $HomebrewInfoCopyWith<$Res> {
           ? _value.outdated
           : outdated // ignore: cast_nullable_to_non_nullable
               as bool,
+      homepage: homepage == freezed
+          ? _value.homepage
+          : homepage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -100,7 +107,8 @@ abstract class _$$_HomebrewInfoCopyWith<$Res>
       {String name,
       HomebrewInfoVersion versions,
       List<HomebrewInfoInstalled> installed,
-      bool outdated});
+      bool outdated,
+      String homepage});
 
   @override
   $HomebrewInfoVersionCopyWith<$Res> get versions;
@@ -123,6 +131,7 @@ class __$$_HomebrewInfoCopyWithImpl<$Res>
     Object? versions = freezed,
     Object? installed = freezed,
     Object? outdated = freezed,
+    Object? homepage = freezed,
   }) {
     return _then(_$_HomebrewInfo(
       name: name == freezed
@@ -141,6 +150,10 @@ class __$$_HomebrewInfoCopyWithImpl<$Res>
           ? _value.outdated
           : outdated // ignore: cast_nullable_to_non_nullable
               as bool,
+      homepage: homepage == freezed
+          ? _value.homepage
+          : homepage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -152,7 +165,8 @@ class _$_HomebrewInfo implements _HomebrewInfo {
       {this.name = 'unknown',
       this.versions = const HomebrewInfoVersion(),
       final List<HomebrewInfoInstalled> installed = const [],
-      this.outdated = false})
+      this.outdated = false,
+      this.homepage = 'https://brew.sh'})
       : _installed = installed;
 
   factory _$_HomebrewInfo.fromJson(Map<String, dynamic> json) =>
@@ -175,10 +189,13 @@ class _$_HomebrewInfo implements _HomebrewInfo {
   @override
   @JsonKey()
   final bool outdated;
+  @override
+  @JsonKey()
+  final String homepage;
 
   @override
   String toString() {
-    return 'HomebrewInfo(name: $name, versions: $versions, installed: $installed, outdated: $outdated)';
+    return 'HomebrewInfo(name: $name, versions: $versions, installed: $installed, outdated: $outdated, homepage: $homepage)';
   }
 
   @override
@@ -190,7 +207,8 @@ class _$_HomebrewInfo implements _HomebrewInfo {
             const DeepCollectionEquality().equals(other.versions, versions) &&
             const DeepCollectionEquality()
                 .equals(other._installed, _installed) &&
-            const DeepCollectionEquality().equals(other.outdated, outdated));
+            const DeepCollectionEquality().equals(other.outdated, outdated) &&
+            const DeepCollectionEquality().equals(other.homepage, homepage));
   }
 
   @JsonKey(ignore: true)
@@ -200,7 +218,8 @@ class _$_HomebrewInfo implements _HomebrewInfo {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(versions),
       const DeepCollectionEquality().hash(_installed),
-      const DeepCollectionEquality().hash(outdated));
+      const DeepCollectionEquality().hash(outdated),
+      const DeepCollectionEquality().hash(homepage));
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +239,8 @@ abstract class _HomebrewInfo implements HomebrewInfo {
       {final String name,
       final HomebrewInfoVersion versions,
       final List<HomebrewInfoInstalled> installed,
-      final bool outdated}) = _$_HomebrewInfo;
+      final bool outdated,
+      final String homepage}) = _$_HomebrewInfo;
 
   factory _HomebrewInfo.fromJson(Map<String, dynamic> json) =
       _$_HomebrewInfo.fromJson;
@@ -233,6 +253,8 @@ abstract class _HomebrewInfo implements HomebrewInfo {
   List<HomebrewInfoInstalled> get installed;
   @override
   bool get outdated;
+  @override
+  String get homepage;
   @override
   @JsonKey(ignore: true)
   _$$_HomebrewInfoCopyWith<_$_HomebrewInfo> get copyWith =>

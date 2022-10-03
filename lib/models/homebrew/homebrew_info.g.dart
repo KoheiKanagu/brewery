@@ -29,6 +29,8 @@ _$_HomebrewInfo _$$_HomebrewInfoFromJson(Map<String, dynamic> json) =>
                       .toList() ??
                   const []),
           outdated: $checkedConvert('outdated', (v) => v as bool? ?? false),
+          homepage: $checkedConvert(
+              'homepage', (v) => v as String? ?? 'https://brew.sh'),
         );
         return val;
       },
@@ -40,4 +42,5 @@ Map<String, dynamic> _$$_HomebrewInfoToJson(_$_HomebrewInfo instance) =>
       'versions': instance.versions.toJson(),
       'installed': instance.installed.map((e) => e.toJson()).toList(),
       'outdated': instance.outdated,
+      'homepage': instance.homepage,
     };

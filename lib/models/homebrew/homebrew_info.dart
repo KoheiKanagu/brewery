@@ -13,6 +13,7 @@ class HomebrewInfo with _$HomebrewInfo {
     @Default(HomebrewInfoVersion()) HomebrewInfoVersion versions,
     @Default([]) List<HomebrewInfoInstalled> installed,
     @Default(false) bool outdated,
+    @Default('https://brew.sh') String homepage,
   }) = _HomebrewInfo;
 
   factory HomebrewInfo.fromJson(Json json) => _$HomebrewInfoFromJson(json);
