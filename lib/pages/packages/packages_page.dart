@@ -1,4 +1,5 @@
 import 'package:brewery/controllers/brew_controller.dart';
+import 'package:brewery/pages/packages/package_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,14 +25,7 @@ class PackagesPage extends HookConsumerWidget {
             ),
       body: ref.watch(brewController).when(
             data: (data) => ListView(
-              children: data
-                  .map(
-                    (e) => ListTile(
-                      title: Text(e.name),
-                      subtitle: Text('latest: ${e.versions.stable}'),
-                    ),
-                  )
-                  .toList(),
+              children: data.map(PackageCard.new).toList(),
             ),
             error: (error, stackTrace) => Center(
               child: Text('$error'),
