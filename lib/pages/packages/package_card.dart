@@ -2,6 +2,7 @@ import 'package:brewery/models/homebrew/homebrew_info.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class PackageCard extends StatelessWidget {
   const PackageCard(
@@ -31,6 +32,13 @@ class PackageCard extends StatelessWidget {
                 const Gap(4),
                 Text('v${homebrewInfo.versions.stable}'),
               ],
+            ),
+            trailing: IconButton(
+              color: Theme.of(context).colorScheme.primary,
+              onPressed: () {
+                launchUrlString(homebrewInfo.homepage);
+              },
+              icon: const Icon(FontAwesomeIcons.globe),
             ),
           ),
         ],
