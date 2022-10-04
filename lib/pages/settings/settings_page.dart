@@ -17,12 +17,18 @@ class SettingsPage extends HookConsumerWidget {
       body: Column(
         children: [
           ListTile(
-            title: const Text('Source'),
+            title: const Text('Abount this app'),
             onTap: () {
-              // TODO
-              launchUrlString('https://github.com/KoheiKanagu');
+              launchUrlString('https://github.com/KoheiKanagu/brewery');
             },
             trailing: const Icon(FontAwesomeIcons.github),
+          ),
+          ListTile(
+            title: const Text('Licences'),
+            onTap: () {
+              showLicensePage(context: context);
+            },
+            trailing: const Icon(FontAwesomeIcons.idCard),
           ),
           const Divider(),
           const ListTile(
