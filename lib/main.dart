@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       home: const HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
