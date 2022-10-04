@@ -3,19 +3,20 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:brewery/models/homebrew/homebrew_info.dart';
+import 'package:brewery/models/homebrew/homebrew_info_results.dart';
 import 'package:brewery/typedefs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final brewController =
-    AsyncNotifierProvider<BrewController, List<HomebrewInfo>>(
+    AsyncNotifierProvider<BrewController, HomebrewInfoResults>(
   BrewController.new,
   name: 'brewController',
 );
 
-class BrewController extends AsyncNotifier<List<HomebrewInfo>> {
+class BrewController extends AsyncNotifier<HomebrewInfoResults> {
   Future<void> refresh() async {
-    state = const AsyncValue<List<HomebrewInfo>>.loading().copyWithPrevious(
+    state = const AsyncValue<HomebrewInfoResults>.loading().copyWithPrevious(
       state,
     );
 
@@ -25,7 +26,7 @@ class BrewController extends AsyncNotifier<List<HomebrewInfo>> {
   }
 
   @visibleForTesting
-  Future<List<HomebrewInfo>> fetchInfo() async {
+  Future<HomebrewInfoResults> fetchInfo() async {
     final results = (await Process.run(
       'brew',
       [
@@ -36,18 +37,20 @@ class BrewController extends AsyncNotifier<List<HomebrewInfo>> {
     ))
         .stdout as String;
 
-    return (json.decode(results) as List<dynamic>)
-        .whereType<Json>()
-        .map(HomebrewInfo.fromJson)
-        .where((e) => e.outdated)
-        .where(
-          (e) => e.installed.single.installedOnRequest,
-        )
-        .toList();
+    return HomebrewInfoResults.create(
+      (json.decode(results) as List<dynamic>)
+          .whereType<Json>()
+          .map(HomebrewInfo.fromJson)
+          .where((e) => e.outdated)
+          .where(
+            (e) => e.installed.single.installedOnRequest,
+          )
+          .toList(),
+    );
   }
 
   @override
-  FutureOr<List<HomebrewInfo>> build() async {
+  FutureOr<HomebrewInfoResults> build() async {
     return fetchInfo();
   }
 }
