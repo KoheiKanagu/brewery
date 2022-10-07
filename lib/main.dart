@@ -1,3 +1,8 @@
+import 'dart:async';
+
+import 'package:brewery/controllers/brew_controller.dart';
+import 'package:brewery/controllers/next_fetch_time_controller.dart';
+import 'package:brewery/controllers/shared_preference_controller.dart';
 import 'package:brewery/pages/home_page.dart';
 import 'package:brewery/provider_logger.dart';
 import 'package:flutter/foundation.dart';
@@ -5,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,11 +34,30 @@ Future<void> main() async {
     return true;
   };
 
+  final container = ProviderContainer(
+    overrides: [
+      sharedPreferences.overrideWithValue(
+        await SharedPreferences.getInstance(),
+      )
+    ],
+    observers: [
+      ProviderLogger(),
+    ],
+  );
+
+  Timer.periodic(
+    const Duration(minutes: 1),
+    (_) {
+      if (container.read(nextFetchTimeController)?.isBefore(DateTime.now()) ??
+          false) {
+        container.read(brewController.notifier).refresh();
+      }
+    },
+  );
+
   runApp(
     ProviderScope(
-      observers: [
-        ProviderLogger(),
-      ],
+      parent: container,
       child: const MyApp(),
     ),
   );

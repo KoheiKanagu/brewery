@@ -1,4 +1,6 @@
 import 'package:brewery/controllers/brew_controller.dart';
+import 'package:brewery/controllers/next_fetch_time_controller.dart';
+import 'package:brewery/extensions/date_time_extension.dart';
 import 'package:brewery/pages/packages/packages_all_up_to_date.dart';
 import 'package:brewery/pages/packages/packages_list.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +31,33 @@ class PackagesPage extends HookConsumerWidget {
       persistentFooterButtons: [
         Row(
           children: [
-            Text(
-              brew.isLoading
-                  ? 'Checking...'
-                  : 'Last check: ${brew.asData?.value.lastCheckDateTimeString}',
-              style: Theme.of(context).textTheme.bodySmall,
+            DefaultTextStyle(
+              style: Theme.of(context).textTheme.bodySmall!,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Visibility(
+                    visible: brew.isLoading,
+                    child: const Text('Checking...'),
+                  ),
+                  Visibility(
+                    visible: !brew.isLoading,
+                    child: Text(
+                      // ignore: lines_longer_than_80_chars
+                      'Last Check: ${brew.asData?.value.lastCheckDateTime.formattedString}',
+                      // style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  Visibility(
+                    visible: !brew.isLoading,
+                    child: Text(
+                      // ignore: lines_longer_than_80_chars
+                      'Next Check: ${ref.watch(nextFetchTimeController).formattedString}',
+                    ),
+                  )
+                ],
+              ),
             ),
             const Spacer(),
             brew.isLoading

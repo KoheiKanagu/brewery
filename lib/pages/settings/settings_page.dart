@@ -1,3 +1,8 @@
+import 'package:brewery/controllers/brew_controller.dart';
+import 'package:brewery/controllers/fetch_interval_controller.dart';
+import 'package:brewery/controllers/next_fetch_time_controller.dart';
+import 'package:brewery/extensions/date_time_extension.dart';
+import 'package:brewery/models/schedule_interval.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,6 +21,29 @@ class SettingsPage extends HookConsumerWidget {
     return Scaffold(
       body: Column(
         children: [
+          ListTile(
+            title: const Text('Update check interval'),
+            trailing:
+                Text(ref.watch(fetchIntervalController).toFormattedString),
+            subtitle: Text(
+              // ignore: lines_longer_than_80_chars
+              'Next Check: ${ref.watch(nextFetchTimeController).formattedString}',
+            ),
+          ),
+          Slider.adaptive(
+            max: ScheduleInterval.values.length.toDouble() - 1,
+            value: ref.watch(fetchIntervalController).index.toDouble(),
+            onChanged: (v) {
+              final results = ScheduleInterval.values[v.toInt()];
+              if (ref.read(fetchIntervalController) != results) {
+                ref
+                    .read(brewController.notifier)
+                    .onChangedFetchInterval(results);
+              }
+            },
+            divisions: ScheduleInterval.values.length,
+          ),
+          const Divider(),
           ListTile(
             title: const Text('Abount this app'),
             onTap: () {

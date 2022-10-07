@@ -1,7 +1,6 @@
 import 'package:brewery/models/homebrew/homebrew_info.dart';
 import 'package:brewery/typedefs.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 part 'homebrew_info_results.freezed.dart';
 part 'homebrew_info_results.g.dart';
@@ -25,8 +24,4 @@ class HomebrewInfoResults with _$HomebrewInfoResults {
         info: info,
         lastCheckDateTime: DateTime.now(),
       );
-
-  String get lastCheckDateTimeString => lastCheckDateTime == null
-      ? 'unknown'
-      : DateFormat('y/M/d HH:mm').format(lastCheckDateTime!);
 }
