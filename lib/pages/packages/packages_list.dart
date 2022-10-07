@@ -1,3 +1,4 @@
+import 'package:brewery/controllers/selected_page_state.dart';
 import 'package:brewery/models/homebrew/homebrew_info_results.dart';
 import 'package:brewery/pages/packages/packages_list_tile.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PackagesList extends StatelessWidget {
+class PackagesList extends HookConsumerWidget {
   const PackagesList(
     this.homebrewInfoResults, {
     super.key,
@@ -14,7 +15,7 @@ class PackagesList extends StatelessWidget {
   final HomebrewInfoResults homebrewInfoResults;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ListView.separated(
       itemBuilder: (context, index) {
         final info = homebrewInfoResults.info;
@@ -33,7 +34,10 @@ class PackagesList extends StatelessWidget {
               ],
             ),
             tileColor: Theme.of(context).colorScheme.secondaryContainer,
-            onTap: () {},
+            onTap: () {
+              ref.read(selectedPageState.notifier).state =
+                  SelectedPageType.upgrading;
+            },
           );
         }
 

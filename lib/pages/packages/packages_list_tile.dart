@@ -1,5 +1,5 @@
+import 'package:brewery/controllers/selected_page_state.dart';
 import 'package:brewery/models/homebrew/homebrew_info.dart';
-import 'package:brewery/pages/upgrade/upgrade_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
@@ -47,14 +47,8 @@ class PackagesListTile extends HookConsumerWidget {
       trailing: IconButton(
         color: Theme.of(context).colorScheme.secondary,
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => const UpgradePage(),
-              settings: const RouteSettings(
-                name: UpgradePage.path,
-              ),
-            ),
-          );
+          ref.read(selectedPageState.notifier).state =
+              SelectedPageType.upgrading;
         },
         tooltip: 'brew upgrade ${homebrewInfo.name}',
         icon: const Icon(
