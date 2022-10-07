@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:brewery/controllers/selected_page_state.dart';
 import 'package:brewery/pages/packages/packages_page.dart';
 import 'package:brewery/pages/settings/settings_page.dart';
@@ -32,7 +33,20 @@ class HomePage extends HookConsumerWidget {
           ),
           Expanded(
             flex: 2,
-            child: body,
+            child: PageTransitionSwitcher(
+              transitionBuilder: (
+                child,
+                primaryAnimation,
+                secondaryAnimation,
+              ) =>
+                  SharedAxisTransition(
+                animation: primaryAnimation,
+                secondaryAnimation: secondaryAnimation,
+                transitionType: SharedAxisTransitionType.vertical,
+                child: child,
+              ),
+              child: body,
+            ),
           ),
         ],
       ),

@@ -7,6 +7,7 @@ import 'package:brewery/controllers/next_fetch_time_controller.dart';
 import 'package:brewery/models/homebrew/homebrew_info.dart';
 import 'package:brewery/models/homebrew/homebrew_info_results.dart';
 import 'package:brewery/models/schedule_interval.dart';
+import 'package:brewery/provider_logger.dart';
 import 'package:brewery/typedefs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -49,6 +50,14 @@ class BrewController extends AsyncNotifier<HomebrewInfoResults> {
 
   @visibleForTesting
   Future<HomebrewInfoResults> fetchInfo() async {
+    final updateResults = await Process.run(
+      'brew',
+      [
+        'update',
+      ],
+    );
+    logger.d(updateResults.stdout);
+
     final results = (await Process.run(
       'brew',
       [

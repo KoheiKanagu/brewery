@@ -1,6 +1,8 @@
 import 'package:brewery/models/homebrew/homebrew_info_results.dart';
 import 'package:brewery/pages/packages/packages_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PackagesList extends StatelessWidget {
@@ -13,19 +15,39 @@ class PackagesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: ListTile.divideTiles(
-        context: context,
-        tiles: homebrewInfoResults.info.map(
-          (e) => ProviderScope(
-            overrides: [
-              packagesListTileTarget.overrideWithValue(e),
-            ],
-            child: const PackagesListTile(),
-          ),
-        ),
-      ).toList(),
-      // children: homebrewInfoResults.info.map(PackageCard.new).toList(),
+    return ListView.separated(
+      itemBuilder: (context, index) {
+        final info = homebrewInfoResults.info;
+
+        if (index == info.length) {
+          return ListTile(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Upgrade All'),
+                const Gap(8),
+                Icon(
+                  FontAwesomeIcons.download,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ],
+            ),
+            tileColor: Theme.of(context).colorScheme.secondaryContainer,
+            onTap: () {},
+          );
+        }
+
+        return ProviderScope(
+          overrides: [
+            packagesListTileTarget.overrideWithValue(
+              info[index],
+            ),
+          ],
+          child: const PackagesListTile(),
+        );
+      },
+      separatorBuilder: (_, __) => const Divider(height: 1),
+      itemCount: homebrewInfoResults.info.length + 1,
     );
   }
 }

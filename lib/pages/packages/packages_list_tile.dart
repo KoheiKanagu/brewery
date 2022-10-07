@@ -1,4 +1,5 @@
 import 'package:brewery/models/homebrew/homebrew_info.dart';
+import 'package:brewery/pages/upgrade/upgrade_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
@@ -35,12 +36,30 @@ class PackagesListTile extends HookConsumerWidget {
           Text('v${homebrewInfo.versions.stable}'),
         ],
       ),
-      trailing: IconButton(
-        color: Theme.of(context).colorScheme.primary,
+      leading: IconButton(
+        color: Theme.of(context).colorScheme.secondary,
+        tooltip: 'open homepage',
         onPressed: () {
           launchUrlString(homebrewInfo.homepage);
         },
         icon: const Icon(FontAwesomeIcons.globe),
+      ),
+      trailing: IconButton(
+        color: Theme.of(context).colorScheme.secondary,
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => const UpgradePage(),
+              settings: const RouteSettings(
+                name: UpgradePage.path,
+              ),
+            ),
+          );
+        },
+        tooltip: 'brew upgrade ${homebrewInfo.name}',
+        icon: const Icon(
+          FontAwesomeIcons.download,
+        ),
       ),
     );
   }
