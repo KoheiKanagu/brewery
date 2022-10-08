@@ -1,3 +1,4 @@
+import 'package:brewery/controllers/brew_upgrade_controller.dart';
 import 'package:brewery/controllers/selected_page_state.dart';
 import 'package:brewery/models/homebrew/homebrew_info.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,7 @@ class PackagesListTile extends HookConsumerWidget {
         onPressed: () {
           ref.read(selectedPageState.notifier).state =
               SelectedPageType.upgrading;
+          ref.read(brewUpgradeController.notifier).upgrade(homebrewInfo);
         },
         tooltip: 'brew upgrade ${homebrewInfo.name}',
         icon: const Icon(
