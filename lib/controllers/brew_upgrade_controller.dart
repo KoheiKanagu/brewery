@@ -16,7 +16,9 @@ class BrewUpgradeController extends AsyncNotifier<String> {
 
   final stringBuffer = StringBuffer();
 
-  Future<void> upgrade(HomebrewInfo info) async {
+  Future<void> upgrade({
+    HomebrewInfo? homebrewInfo,
+  }) async {
     stringBuffer.clear();
     state = const AsyncValue<String>.loading()
         .copyWithPrevious(const AsyncValue.data(''));
@@ -24,15 +26,20 @@ class BrewUpgradeController extends AsyncNotifier<String> {
     final process = await Process.start(
       'brew',
       [
-        'info',
-        info.name,
-        '--verbose',
+        'upgrade',
+        if (homebrewInfo != null) homebrewInfo.name,
+        // '--dry-run',
       ],
     );
 
-    await process.stdout.transform(utf8.decoder).forEach(_write);
-    await process.stderr.transform(utf8.decoder).forEach(_write);
+    final stdoutSubscription =
+        process.stdout.transform(utf8.decoder).listen(_write);
+    final stderrSubscription =
+        process.stderr.transform(utf8.decoder).listen(_write);
     await process.exitCode;
+
+    await stdoutSubscription.cancel();
+    await stderrSubscription.cancel();
 
     state = AsyncValue.data(stringBuffer.toString());
   }

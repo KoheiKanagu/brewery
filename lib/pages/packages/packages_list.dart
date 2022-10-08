@@ -1,3 +1,4 @@
+import 'package:brewery/controllers/brew_upgrade_controller.dart';
 import 'package:brewery/controllers/selected_page_state.dart';
 import 'package:brewery/models/homebrew/homebrew_info_results.dart';
 import 'package:brewery/pages/packages/packages_list_tile.dart';
@@ -37,6 +38,7 @@ class PackagesList extends HookConsumerWidget {
             onTap: () {
               ref.read(selectedPageState.notifier).state =
                   SelectedPageType.upgrading;
+              ref.read(brewUpgradeController.notifier).upgrade();
             },
           );
         }

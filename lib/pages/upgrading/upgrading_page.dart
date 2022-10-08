@@ -1,6 +1,7 @@
 import 'package:brewery/controllers/brew_controller.dart';
 import 'package:brewery/controllers/brew_upgrade_controller.dart';
 import 'package:brewery/controllers/selected_page_state.dart';
+import 'package:brewery/pages/upgrading/upgrading_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -61,9 +62,7 @@ class UpgradingPage extends HookConsumerWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         controller: controller,
-        child: SelectableText(
-          ref.watch(brewUpgradeController).asData?.value ?? '',
-        ),
+        child: const UpgradingPageBody(),
       ),
     );
   }

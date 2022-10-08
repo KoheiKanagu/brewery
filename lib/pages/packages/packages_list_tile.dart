@@ -50,7 +50,9 @@ class PackagesListTile extends HookConsumerWidget {
         onPressed: () {
           ref.read(selectedPageState.notifier).state =
               SelectedPageType.upgrading;
-          ref.read(brewUpgradeController.notifier).upgrade(homebrewInfo);
+          ref.read(brewUpgradeController.notifier).upgrade(
+                homebrewInfo: homebrewInfo,
+              );
         },
         tooltip: 'brew upgrade ${homebrewInfo.name}',
         icon: const Icon(
