@@ -4,6 +4,8 @@ Brewery is a tool that automatically checks for updates to packages installed wi
 
 ![demo](screenshots/demo.gif)
 
+[App Icon](https://www.svgrepo.com/svg/317476/bar)
+
 # Features
 
 - Lists packages that need to be updated.
@@ -11,3 +13,8 @@ Brewery is a tool that automatically checks for updates to packages installed wi
 - View logs output from Homebrew when upgrading.
 - Automatically checks for package updates (of course, you can also check manually)
 - Resides in the menu bar.
+
+## App Icon
+
+- <https://www.svgrepo.com/svg/1068/wheat>
+- <https://www.svgrepo.com/svg/76825/wheat>
