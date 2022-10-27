@@ -26,7 +26,7 @@ class PackagesListTile extends HookConsumerWidget {
       subtitle: Row(
         children: [
           Text(
-            'v${homebrewInfo.installed.single.version}',
+            'v${homebrewInfo.installed.last.version}',
           ),
           const Gap(4),
           Icon(

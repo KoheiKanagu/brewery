@@ -74,7 +74,7 @@ class BrewController extends AsyncNotifier<HomebrewInfoResults> {
           .map(HomebrewInfo.fromJson)
           .where((e) => e.outdated)
           .where(
-            (e) => e.installed.single.installedOnRequest,
+            (e) => e.installed.last.installedOnRequest,
           )
           .toList(),
     );
