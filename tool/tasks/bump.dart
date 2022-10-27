@@ -4,28 +4,6 @@ import 'package:grinder/grinder.dart';
   'Bump version number',
 )
 void bump() {
-  run(
-    'git',
-    arguments: [
-      'fetch',
-    ],
-  );
-
-  run(
-    'git',
-    arguments: [
-      'checkout',
-      'main',
-    ],
-  );
-
-  run(
-    'git',
-    arguments: [
-      'pull',
-    ],
-  );
-
   final buildNumber = run(
     'git',
     arguments: [
