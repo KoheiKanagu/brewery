@@ -46,9 +46,11 @@ class BrewUpgradeController extends AsyncNotifier<String> {
 
   void _write(String value) {
     stringBuffer.write(value);
-    state = AsyncValue.data(
-      stringBuffer.toString(),
-    ).copyWithPrevious(state);
+    state = state.copyWithPrevious(
+      AsyncValue.data(
+        stringBuffer.toString(),
+      ),
+    );
   }
 
   @override
