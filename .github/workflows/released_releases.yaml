@@ -1,0 +1,39 @@
+name: Released Releases
+
+on:
+  release:
+    types:
+      - released
+
+env:
+  FLUTTER_VERSION: "3.3.5" # FIXME
+
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      ### Setup ###
+      - uses: actions/checkout@v3
+
+      - name: CocoaPods Cache
+        if: ${{ runner.os == 'macOS' }}
+        uses: actions/cache@v3
+        with:
+          path: ./ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}-v1
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: "Install Flutter"
+        run: ./.github/workflows/scripts/install-flutter.sh $FLUTTER_VERSION
+
+      ### Build ###
+      - name: Build
+        run: flutter build macos --release
+
+      ### Deploy ###
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./build/macos/Build/Products/Release/brewery.app
