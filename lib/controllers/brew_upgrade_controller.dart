@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:brewery/controllers/brew_controller.dart';
 import 'package:brewery/models/homebrew/homebrew_info.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,7 +25,7 @@ class BrewUpgradeController extends AsyncNotifier<String> {
         .copyWithPrevious(const AsyncValue.data(''));
 
     final process = await Process.start(
-      'brew',
+      brewPath,
       [
         'upgrade',
         if (homebrewInfo != null) homebrewInfo.name,

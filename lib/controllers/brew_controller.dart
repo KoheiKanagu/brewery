@@ -18,6 +18,21 @@ final brewController =
   name: 'brewController',
 );
 
+String get brewPath {
+  final uname = Process.runSync(
+    'uname',
+    [
+      ' -m',
+    ],
+  ).stdout as String;
+
+  if (uname == 'arm64') {
+    return '/opt/homebrew/bin/brew';
+  } else {
+    return '/usr/local/bin/brew';
+  }
+}
+
 class BrewController extends AsyncNotifier<HomebrewInfoResults> {
   Timer? nextFetchTimer;
 
@@ -51,7 +66,7 @@ class BrewController extends AsyncNotifier<HomebrewInfoResults> {
   @visibleForTesting
   Future<HomebrewInfoResults> fetchInfo() async {
     final updateResults = await Process.run(
-      'brew',
+      brewPath,
       [
         'update',
       ],
@@ -59,7 +74,7 @@ class BrewController extends AsyncNotifier<HomebrewInfoResults> {
     logger.d(updateResults.stdout);
 
     final results = (await Process.run(
-      'brew',
+      brewPath,
       [
         'info',
         '--json',
