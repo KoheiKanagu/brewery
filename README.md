@@ -1,16 +1,19 @@
-# brewery
+# Brewery
 
-A new Flutter project.
+<img src="assets/app_icon.png" alt="app_icon" width="256"/>
 
-## Getting Started
+Brewery is a tool that automatically checks for updates to packages installed with [Homebrew](https://brew.sh/).
 
-This project is a starting point for a Flutter application.
+# Features
 
-A few resources to get you started if this is your first Flutter project:
+- Lists packages that need to be updated.
+- Upgrade packages with a single click.
+- View logs output from Homebrew when upgrading.
+- Automatically checks for package updates (of course, you can also check manually)
+- Resides in the menu bar.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![demo](screenshots/demo.gif)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# App Icon
+
+- <https://www.svgrepo.com/svg/1068/wheat>

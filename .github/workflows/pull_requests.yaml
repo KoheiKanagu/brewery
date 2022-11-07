@@ -1,0 +1,35 @@
+name: Pull Requests
+
+on:
+  pull_request:
+    paths-ignore:
+      - "firebase/**"
+
+env:
+  FLUTTER_VERSION: "3.3.5" # FIXME
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      ### Set up ###
+      - uses: actions/checkout@v3
+
+      - name: CocoaPods Cache
+        if: ${{ runner.os == 'macOS' }}
+        uses: actions/cache@v3
+        with:
+          path: ./macos/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}-v1
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: "Install Flutter"
+        run: ./.github/workflows/scripts/install-flutter.sh $FLUTTER_VERSION
+
+      ### Build ###
+      - name: Build
+        run: |
+          flutter pub get
+          flutter build macos
