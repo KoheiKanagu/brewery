@@ -3,7 +3,7 @@ name: Pull Requests
 on:
   pull_request:
     paths-ignore:
-      - "firebase/**"
+      - "tool/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
