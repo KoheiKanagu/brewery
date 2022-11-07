@@ -32,8 +32,11 @@ jobs:
         run: flutter build macos --release
 
       ### Deploy ###
+      - name: zip App
+        working-directory: ./build/macos/Build/Products/Release
+        run: zip -r Brewery.zip Brewery.app
+
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            ./build/macos/Build/Products/Release/brewery.app
+          files: ./build/macos/Build/Products/Release/Brewery.zip
