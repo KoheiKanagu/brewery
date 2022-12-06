@@ -19,7 +19,7 @@ dependencies:
   font_awesome_flutter: ^10.3.0
   freezed_annotation: ^2.2.0
   gap: ^2.0.1
-  hooks_riverpod: ^2.0.2
+  hooks_riverpod: ^2.1.1
   intl: any
   json_annotation: ^4.7.0
   roggle: ^0.3.0
