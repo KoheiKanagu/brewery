@@ -1,5 +1,17 @@
-# https://pub.dev/packages/pedantic_mono
-include: package:pedantic_mono/analysis_options.yaml
+include: package:very_good_analysis/analysis_options.yaml
+linter:
+  rules:
+    public_member_api_docs: false
+    flutter_style_todos: false
 analyzer:
-  strong-mode:
-    implicit-dynamic: true
+  errors:
+    require_trailing_commas: ignore
+  exclude:
+    - "build/**"
+    - "assets/**"
+    - "coverage/**"
+    - ".dart_tool/**"
+    - "lib/**/*.g.dart"
+    - "lib/gen/**"
+  plugins:
+    - custom_lint

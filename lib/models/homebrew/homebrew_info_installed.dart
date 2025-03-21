@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'package:brewery/typedefs.dart';
+import 'package:brewery/utils/typedefs.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'homebrew_info_installed.freezed.dart';

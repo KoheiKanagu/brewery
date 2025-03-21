@@ -60,12 +60,10 @@ class PackagesPage extends HookConsumerWidget {
               ),
             ),
             const Spacer(),
-            brew.isLoading
-                ? const ElevatedButton(
+            if (brew.isLoading) const ElevatedButton(
                     onPressed: null,
                     child: CircularProgressIndicator.adaptive(),
-                  )
-                : ElevatedButton(
+                  ) else ElevatedButton(
                     onPressed: () {
                       ref.read(brewController.notifier).refresh();
                     },
