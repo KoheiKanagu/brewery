@@ -1,14 +1,36 @@
 version: 2
-enable-beta-ecosystems: true
 updates:
-  - package-ecosystem: "pub"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 100
-
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Asia/Tokyo"
+
+  - package-ecosystem: "pub"
+    directory: "/"
     open-pull-requests-limit: 100
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Asia/Tokyo"
+
+    groups:
+      freezed:
+        patterns:
+          - "freezed_annotation"
+          - "freezed"
+          - "json_annotation"
+          - "json_serializable"
+
+      riverpod:
+        patterns:
+          - "hooks_riverpod"
+          - "riverpod_*"
+
+      talker:
+        patterns:
+          - "talker"
+          - "talker_*"
