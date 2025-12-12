@@ -22,7 +22,7 @@ jobs:
 
       - name: CocoaPods Cache
         if: ${{ runner.os == 'macOS' }}
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ./macos/Pods
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}-v1
